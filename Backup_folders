@@ -1,0 +1,17 @@
+#!/bin/sh
+PATH=/etc:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+echo "----------------------------------------" >> /backup2/logs/etc
+echo "Start backup_"$(date "+%d.%m.%Y") $(date "+%T") >> /backup2/logs/etc
+echo "---------------------------------------------------------------"
+rsync -azvh /etc/ /backup2/etc/$(date "+%Y%m%d")_etc_$(date "+%d.%m.%Y")
+echo $(pwd)
+echo "----------------------------"
+echo "----------------------------"
+cd /backup2/etc
+echo $(pwd)
+echo "----------------------------"
+echo "----------------------------"
+tar -cf $(date "+%Y%m%d")_etc_$(date "+%d.%m.%Y")__name_server_$(hostname).tar.gz $(date "+%Y%m%d")_etc_$(date "+%d.%m.%Y")
+echo "Backup completed_"$(date "+%d.%m.%Y") $(date "+%T" ) >> /backup2/logs/etc
+echo "----------------------------------------" >> /backup2/logs/etc
